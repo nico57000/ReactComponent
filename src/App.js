@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import './App.css';
 import TodoList from './Components/TodoList';
+import TodoForms from './Components/TodoForms';
 
 const firstTodo = [
   {
@@ -25,8 +26,23 @@ const firstTodo = [
   },
 ];
 
-function App() {
+const key = "react.todos";
 
+function App() {
+  const [todoId, settodoId] = useState();
+  const [todos,settodos] = useState(firstTodo);
+
+  useEffect(() => {
+    const todoRetrievedFromStorage = localStorage.getItem(key);
+    if (todoRetrievedFromStorage) {
+      settodos(JSON.parse(todoRetrievedFromStorage))
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(key,JSON.stringify(todos));
+  },[todos]);
+  
   function handleStatusChange(id){
     console.log("id",id);
     settodoId(id);
@@ -35,13 +51,23 @@ function App() {
     const newTodos = todos.map(todo => (todo.id !== id ? todo : todoToModify));
     settodos(newTodos);
   }
-  const [todoId, settodoId] = useState();
-  const [todos,settodos] = useState(firstTodo);
+
+  function handleTodoCreation(description){
+    const newTodo = {
+      id: Date.now(),
+      description,
+      done:false
+    };
+    const allTodos = [newTodo, ...todos];
+    settodos(allTodos);
+  }
+
   return (
     <>
       <h1>Todo App</h1>
-      <div>todoId vaut : {todoId}</div>
-      <TodoList todos={firstTodo} handleStatusChange={handleStatusChange} />
+      <TodoForms handleTodoCreation={handleTodoCreation}/>
+      <h3>Mes Todos</h3>
+      <TodoList todos={todos} handleStatusChange={handleStatusChange} />
     </>
   );
 }

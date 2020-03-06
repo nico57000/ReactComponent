@@ -63,12 +63,12 @@ function App() {
   }
 
   return (
-    <>
-      <h1>Todo App</h1>
+    <div className='container'>
+      <h1 class="h1">Todo App</h1>
       <TodoForms handleTodoCreation={handleTodoCreation}/>
-      <h3>Mes Todos</h3>
+      <h3 class="h3">Mes Todos</h3>
       <TodoList todos={todos} handleStatusChange={handleStatusChange} />
-    </>
+    </div>
   );
 }
 

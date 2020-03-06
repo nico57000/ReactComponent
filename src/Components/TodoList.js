@@ -3,7 +3,7 @@ import Todo from './Todo'
 
 export default function TodoList(props){
     return(
-        <ul>
+        <ul className='list-group list-group-flush'>
             {props.todos.map(todo => (
             <Todo 
                 key={todo.id} 

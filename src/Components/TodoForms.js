@@ -14,15 +14,19 @@ export default function TodoForms({ handleTodoCreation }){
 
     }
     return(
-        <form onSubmit={handleFormsSubmit}>
-            <input 
-                type="text" 
-                placeholder="description" 
-                name="description" 
-                value={description} 
-                onChange={e => handleDescriptionChange(e)}
-            />
-            <button type="submit">Ajouter</button>
+        <form onSubmit={handleFormsSubmit} class="form-inline">
+            <div class="form-group mx-sm-3 mb-2">
+                <input 
+                    id='email'
+                    className='form-control'
+                    type="text" 
+                    placeholder="Tâche"
+                    name="description" 
+                    value={description} 
+                    onChange={e => handleDescriptionChange(e)}
+                />
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Ajouter Tâche</button>
         </form>
     );
 }

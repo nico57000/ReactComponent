@@ -3,7 +3,7 @@ import React from 'react'
 export default function Todo(props){
     const todo = props.data;
     return(
-        <div>
+        <div className='list-group-item'>
             <input type="checkbox" 
                 checked={todo.done} 
                 onChange={() => props.handleStatusChange(todo.id)} 
